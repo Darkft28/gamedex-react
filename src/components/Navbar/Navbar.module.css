@@ -1,0 +1,122 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  height: 3.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 800;
+  text-decoration: none;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #a78bfa 0%, #6366f1 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.logo svg {
+  -webkit-text-fill-color: initial;
+  color: #7c5cff;
+  flex-shrink: 0;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.15s, background-color 0.15s;
+}
+
+.link:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.active {
+  opacity: 1;
+  color: #a78bfa;
+  background-color: rgba(124, 92, 255, 0.1);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #7c5cff, #6366f1);
+  color: #fff;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.25rem;
+  line-height: 1;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  opacity: 0.55;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.15s, background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.themeToggle:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Thème clair ── */
+:global([data-theme=light]) .link:hover {
+  background-color: rgba(124, 92, 255, 0.08);
+}
+
+:global([data-theme=light]) .active {
+  color: #5b21b6;
+  background-color: rgba(124, 92, 255, 0.1);
+}
+
+:global([data-theme=light]) .themeToggle:hover {
+  background-color: rgba(124, 92, 255, 0.08);
+}

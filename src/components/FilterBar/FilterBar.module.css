@@ -1,0 +1,41 @@
+.bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.875rem 0;
+  position: sticky;
+  top: 3.5rem;
+  z-index: 10;
+  background: rgba(10, 9, 18, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  flex: 1;
+  min-width: 180px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--color-text) !important;
+}
+
+.input:focus {
+  border-color: rgba(124, 92, 255, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(124, 92, 255, 0.15) !important;
+}
+
+/* Appliqué directement sur SelectTrigger — remplace les anciens wrappers <div> */
+.selectTrigger {
+  width: 160px !important;
+  flex-shrink: 0;
+}
+
+/* ── Thème clair ── */
+:global([data-theme=light]) .bar {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(12px);
+}

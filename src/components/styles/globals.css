@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 30% 97%;
+    --foreground: 224 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 25% 12%;
+    --primary: 252 100% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 20% 94%;
+    --secondary-foreground: 224 25% 12%;
+    --muted: 220 20% 94%;
+    --muted-foreground: 220 15% 46%;
+    --accent: 220 20% 94%;
+    --accent-foreground: 224 25% 12%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 88%;
+    --input: 220 20% 88%;
+    --ring: 252 100% 68%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 240 22% 5%;
+    --foreground: 220 18% 90%;
+    --card: 240 18% 8%;
+    --card-foreground: 220 18% 90%;
+    --popover: 240 18% 8%;
+    --popover-foreground: 220 18% 90%;
+    --primary: 252 100% 68%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 14% 13%;
+    --secondary-foreground: 220 18% 90%;
+    --muted: 240 14% 13%;
+    --muted-foreground: 220 12% 58%;
+    --accent: 240 14% 15%;
+    --accent-foreground: 220 18% 90%;
+    --destructive: 0 63% 40%;
+    --destructive-foreground: 220 18% 90%;
+    --border: 240 12% 14%;
+    --input: 240 12% 14%;
+    --ring: 252 100% 68%;
+  }
+}
+
+:root {
+  --color-primary: hsl(var(--primary));
+  --color-bg: hsl(var(--background));
+  --color-surface: hsl(var(--card));
+  --color-text: hsl(var(--foreground));
+
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover-border: rgba(124, 92, 255, 0.45);
+  --glow-primary: rgba(124, 92, 255, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark body,
+.dark {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.08) 0%, transparent 60%);
+}
+
+/* Variables supplémentaires pour la cohérence thème */
+[data-theme=light] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --overlay-card: rgba(0, 0, 0, 0.04);
+  --glass-hover-border: rgba(124, 92, 255, 0.5);
+}
+
+/* Gradient de fond thème clair */
+[data-theme=light] body {
+  background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 92, 255, 0.06) 0%, transparent 60%);
+}

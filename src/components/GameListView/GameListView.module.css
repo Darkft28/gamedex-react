@@ -1,0 +1,83 @@
+.page {
+  width: 100%;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #fff 60%, rgba(167, 139, 250, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+}
+
+.skeleton {
+  border-radius: 0.75rem;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(124, 92, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.empty {
+  text-align: center;
+  opacity: 0.4;
+  padding: 5rem 0;
+  font-size: 1rem;
+}
+
+.sentinel {
+  height: 1px;
+  margin-top: 2rem;
+}
+
+.loadingMore {
+  text-align: center;
+  padding: 1.25rem 0;
+  opacity: 0.4;
+  font-size: 0.875rem;
+}
+
+/* ── Thème clair ── */
+:global([data-theme=light]) .skeleton {
+  background: linear-gradient(
+    105deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(124, 92, 255, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 75%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
