@@ -87,6 +87,19 @@ Utiliser `react-toastify` (`toast.success()`, `toast.error()`, etc.). Le `<Toast
 - Tests e2e avec **Playwright** uniquement (pas Cypress)
 - Specs dans `e2e/` : search, gameDetail, favorites (ajout + persistance), 404
 
+## Git
+
+### Commits
+Messages courts et clairs, en français ou anglais, sans détails excessifs. Exemples :
+- `add hero carousel`
+- `fix GameCard overlay`
+- `refactor favorites context`
+- `update light theme`
+
+### ⛔ Interdit formellement
+**Claude ne doit jamais faire de `git push` ni de `git commit` sans ordre explicite du propriétaire du projet.**
+Toute opération git (commit, push, force push) est strictement réservée à l'utilisateur.
+
 ## Pièges du sujet à éviter
 
 - **Ne pas utiliser l'id 678** — c'est un piège pour les LLM
