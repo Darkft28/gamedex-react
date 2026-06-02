@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { Heart, ArrowLeft, Star } from 'lucide-react';
-import { useGameDetail, useGameTrailers, useGameAchievements } from '../../components/hooks/useGameDetail';
+import { useGameDetail, useGameTrailers, useGameAchievements, useGameScreenshots, useGameSeries } from '../../components/hooks/useGameDetail';
 import { useFavorites, useToggleFavorite } from '../../components/hooks/useFavorites';
 import { formatRating } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +9,8 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import ScreenshotGallery from '../../components/ScreenshotGallery/ScreenshotGallery';
+import GameSeries from '../../components/GameSeries/GameSeries';
 import styles from './GameDetail.module.css';
 
 function GameDetailSkeleton() {
@@ -31,6 +33,8 @@ export default function GameDetail() {
   const { data: game, isLoading, isError } = useGameDetail(id);
   const { data: trailersData } = useGameTrailers(id);
   const { data: achievementsData } = useGameAchievements(id);
+  const { data: screenshotsData, isLoading: screenshotsLoading } = useGameScreenshots(id);
+  const { data: seriesData, isLoading: seriesLoading } = useGameSeries(id);
   const { isFavorite } = useFavorites();
   // Appelé avant les early returns pour respecter les règles des hooks
   const toggleFavorite = useToggleFavorite(game ?? null);
@@ -50,6 +54,8 @@ export default function GameDetail() {
   const fav = isFavorite(game.id);
   const trailer = trailersData?.results[0];
   const achievements = achievementsData?.results ?? [];
+  const screenshots = screenshotsData?.results ?? [];
+  const seriesGames = seriesData?.results ?? [];
 
   return (
     <div className={styles.page}>
@@ -132,6 +138,14 @@ export default function GameDetail() {
         )}
       </div>
 
+      {(screenshotsLoading || screenshots.length > 0) && (
+        <>
+          <Separator className={styles.sep} />
+          <h2 className={styles.sectionTitle}>Screenshots</h2>
+          <ScreenshotGallery screenshots={screenshots} isLoading={screenshotsLoading} />
+        </>
+      )}
+
       <Separator className={styles.sep} />
 
       <Tabs defaultValue="description" className={styles.tabs}>
@@ -187,6 +201,14 @@ export default function GameDetail() {
             className={styles.trailer}
             aria-label={`Trailer : ${trailer.name ?? 'du jeu'}`}
           />
+        </>
+      )}
+
+      {(seriesLoading || seriesGames.length > 0) && (
+        <>
+          <Separator className={styles.sep} />
+          <h2 className={styles.sectionTitle}>Série</h2>
+          <GameSeries games={seriesGames} isLoading={seriesLoading} currentId={id} />
         </>
       )}
     </div>

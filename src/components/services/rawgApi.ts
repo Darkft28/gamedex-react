@@ -1,13 +1,13 @@
-import type { RawgGame, RawgGameDetail, RawgPlatform, RawgStore, RawgPaginated, RawgAchievement, RawgTrailer, RawgPublisher } from '../../types/rawg';
+import type { RawgGame, RawgGameDetail, RawgPlatform, RawgStore, RawgPaginated, RawgAchievement, RawgTrailer, RawgPublisher, RawgGenre, RawgScreenshot } from '../../types/rawg';
 
-const BASE_URL = 'https://api.rawg.io/api';
-const API_KEY = import.meta.env.VITE_RAWG_API_KEY as string;
+// Le proxy Vite redirige /rawg → https://api.rawg.io/api et injecte la clé côté serveur.
+// La clé n'est jamais envoyée au navigateur.
+const BASE_URL = '/rawg';
 
 type Params = Record<string, string | number | undefined | null>;
 
 async function rawgFetch<T>(endpoint: string, params: Params = {}): Promise<T> {
-  const url = new URL(`${BASE_URL}${endpoint}`);
-  url.searchParams.set('key', API_KEY);
+  const url = new URL(`${BASE_URL}${endpoint}`, window.location.origin);
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, String(v));
   });
@@ -26,10 +26,15 @@ export const fetchGameTrailers = (id: number | string) =>
   rawgFetch<RawgPaginated<RawgTrailer>>(`/games/${id}/movies`);
 export const fetchPublisherGames = (id: number | string, params: Params) =>
   rawgFetch<RawgPaginated<RawgGame>>('/games', { publishers: id, ...params });
-// page_size=40 pour charger toutes les plateformes/stores en une requête (RAWG en a plus de 20)
 export const fetchPlatforms = () =>
   rawgFetch<RawgPaginated<RawgPlatform>>('/platforms', { page_size: 40 });
 export const fetchStores = () =>
   rawgFetch<RawgPaginated<RawgStore>>('/stores', { page_size: 40 });
 export const fetchPublisher = (id: number | string) =>
   rawgFetch<RawgPublisher>(`/publishers/${id}`);
+export const fetchGenres = () =>
+  rawgFetch<RawgPaginated<RawgGenre>>('/genres', { page_size: 40 });
+export const fetchGameScreenshots = (id: number | string) =>
+  rawgFetch<RawgPaginated<RawgScreenshot>>(`/games/${id}/screenshots`);
+export const fetchGameSeries = (id: number | string) =>
+  rawgFetch<RawgPaginated<RawgGame>>(`/games/${id}/game-series`);

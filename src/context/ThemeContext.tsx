@@ -7,6 +7,7 @@ type ThemeContextType = {
   toggleTheme: () => void;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -15,7 +16,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return stored === 'light' ? 'light' : 'dark';
   });
 
-  // Applique le thème au DOM à chaque changement (y compris au montage initial)
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.classList.toggle('dark', theme === 'dark');

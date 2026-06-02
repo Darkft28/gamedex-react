@@ -1,10 +1,6 @@
 import { createContext, useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import type { RawgGame } from '../types/rawg';
 
-/**
- * Sous-ensemble minimal de RawgGame réellement utilisé par GameCard.
- * Réduire ce qui est sérialisé dans localStorage allège la taille et JSON.stringify.
- */
 export type StoredGame = Pick<RawgGame, 'id' | 'name' | 'background_image' | 'rating'>;
 
 type FavoritesContextType = {
@@ -14,6 +10,7 @@ type FavoritesContextType = {
   isFavorite: (id: number) => boolean;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const FavoritesContext = createContext<FavoritesContextType | null>(null);
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
@@ -45,7 +42,6 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
     (game: RawgGame) =>
       setFavorites((prev) => {
         if (prev.some((g) => g.id === game.id)) return prev;
-        // Stocke uniquement les champs utilisés par GameCard
         const { id, name, background_image, rating } = game;
         return [...prev, { id, name, background_image, rating }];
       }),

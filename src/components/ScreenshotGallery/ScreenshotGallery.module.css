@@ -1,0 +1,144 @@
+.track {
+  display: flex;
+  gap: 0.625rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 92, 252, 0.3) transparent;
+}
+
+.track::-webkit-scrollbar {
+  height: 4px;
+}
+
+.track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.track::-webkit-scrollbar-thumb {
+  background: rgba(124, 92, 252, 0.3);
+  border-radius: 2px;
+}
+
+.thumb {
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  transition: transform 150ms, box-shadow 150ms;
+  border: 2px solid transparent;
+}
+
+.thumb:hover {
+  transform: scale(1.03);
+  border-color: rgba(124, 92, 252, 0.5);
+  box-shadow: 0 0 0 2px rgba(124, 92, 252, 0.2);
+}
+
+.thumbImg {
+  display: block;
+  height: 130px;
+  width: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.skeleton {
+  flex-shrink: 0;
+  height: 130px;
+  width: 230px;
+  border-radius: 0.5rem;
+  background: rgba(124, 92, 252, 0.08);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Lightbox ── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+.lightboxImg {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 0.75rem;
+  object-fit: contain;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.navLeft {
+  left: 1.25rem;
+}
+
+.navRight {
+  right: 1.25rem;
+}
+
+.counter {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}

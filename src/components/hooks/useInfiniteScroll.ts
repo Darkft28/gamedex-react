@@ -1,12 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-/**
- * Gère l'infinite scroll via IntersectionObserver et affiche un toast en cas d'erreur.
- * L'observer n'est créé qu'une fois (fetchNextPage est stable par TanStack Query).
- * hasNextPage et isFetchingNextPage sont lus via refs pour ne pas déclencher de
- * re-création de l'observer à chaque chargement de page.
- */
 export function useInfiniteScroll(
   fetchNextPage: () => unknown,
   hasNextPage: boolean,
@@ -14,6 +8,7 @@ export function useInfiniteScroll(
   isError: boolean,
 ) {
   const sentinelRef = useRef<HTMLDivElement>(null);
+  // Refs pour lire les valeurs courantes dans le callback sans recréer l'observer
   const hasNextPageRef = useRef(hasNextPage);
   const isFetchingNextPageRef = useRef(isFetchingNextPage);
 

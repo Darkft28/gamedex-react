@@ -30,6 +30,7 @@ export type GameFilters = {
   platforms: string;
   stores: string;
   ordering: string;
+  genres: string;
 };
 
 export const INITIAL_FILTERS: GameFilters = {
@@ -37,6 +38,7 @@ export const INITIAL_FILTERS: GameFilters = {
   platforms: '',
   stores: '',
   ordering: '-rating',
+  genres: '',
 };
 
 export type RawgGameDetail = RawgGame & {
@@ -70,4 +72,18 @@ export type RawgPublisher = {
   slug: string;
   games_count: number;
   image_background: string | null;
+};
+
+export type RawgGenre = {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+};
+
+export type RawgScreenshot = {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
 };

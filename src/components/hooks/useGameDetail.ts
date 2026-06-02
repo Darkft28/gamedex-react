@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchGameDetail, fetchGameAchievements, fetchGameTrailers } from '../services/rawgApi';
+import { fetchGameDetail, fetchGameAchievements, fetchGameTrailers, fetchGameScreenshots, fetchGameSeries } from '../services/rawgApi';
 
 export function useGameDetail(id: string | undefined) {
   return useQuery({
@@ -23,6 +23,24 @@ export function useGameTrailers(id: string | undefined) {
   return useQuery({
     queryKey: ['game-trailers', id],
     queryFn: () => fetchGameTrailers(id ?? ''),
+    enabled: !!id,
+    staleTime: Infinity,
+  });
+}
+
+export function useGameScreenshots(id: string | undefined) {
+  return useQuery({
+    queryKey: ['game-screenshots', id],
+    queryFn: () => fetchGameScreenshots(id ?? ''),
+    enabled: !!id,
+    staleTime: Infinity,
+  });
+}
+
+export function useGameSeries(id: string | undefined) {
+  return useQuery({
+    queryKey: ['game-series', id],
+    queryFn: () => fetchGameSeries(id ?? ''),
     enabled: !!id,
     staleTime: Infinity,
   });

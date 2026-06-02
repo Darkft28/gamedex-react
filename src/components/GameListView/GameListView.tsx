@@ -1,6 +1,7 @@
-import type { ReactNode, RefObject } from 'react';
+import { useState, type ReactNode, type RefObject } from 'react';
 import FilterBar from '../FilterBar/FilterBar';
 import GameCard from '../GameCard/GameCard';
+import GenreDrawer from '../GenreDrawer/GenreDrawer';
 import type { GameFilters, RawgGame } from '../../types/rawg';
 import styles from './GameListView.module.css';
 
@@ -27,13 +28,26 @@ export default function GameListView({
   filters,
   setFilters,
 }: Props) {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <div className={styles.page}>
       {title && <h1 className={styles.title}>{title}</h1>}
 
       {hero}
 
-      <FilterBar filters={filters} onChange={setFilters} />
+      <FilterBar
+        filters={filters}
+        onChange={setFilters}
+        onOpenGenres={() => setDrawerOpen(true)}
+      />
+
+      <GenreDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        filters={filters}
+        onChange={setFilters}
+      />
 
       {isLoading && (
         <div className={styles.grid} aria-busy="true" aria-label="Chargement des jeux">

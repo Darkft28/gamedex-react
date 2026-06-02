@@ -10,27 +10,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Gamepad2, ShoppingBag, Star, Clock, Plus, ArrowUpAZ, History, SlidersHorizontal } from 'lucide-react';
 import styles from './FilterBar.module.css';
 
 const SORT_OPTIONS = [
-  { value: '-rating', label: 'Meilleures notes' },
-  { value: '-released', label: 'Les plus récents' },
-  { value: '-added', label: 'Récemment ajoutés' },
-  { value: 'name', label: 'Nom (A–Z)' },
-  { value: 'released', label: 'Les plus anciens' },
+  { value: '-rating', label: 'Meilleures notes', icon: Star },
+  { value: '-released', label: 'Les plus récents', icon: Clock },
+  { value: '-added', label: 'Récemment ajoutés', icon: Plus },
+  { value: 'name', label: 'Nom (A–Z)', icon: ArrowUpAZ },
+  { value: 'released', label: 'Les plus anciens', icon: History },
 ];
 
 type Props = {
   filters: GameFilters;
   onChange: (filters: GameFilters) => void;
+  onOpenGenres: () => void;
 };
 
-export default function FilterBar({ filters, onChange }: Props) {
+export default function FilterBar({ filters, onChange, onOpenGenres }: Props) {
   const { data: platformsData, isLoading: platformsLoading } = usePlatforms();
   const { data: storesData, isLoading: storesLoading } = useStores();
 
   return (
     <section className={styles.bar} aria-label="Filtres et recherche">
+      <button
+        className={styles.genresBtn}
+        onClick={onOpenGenres}
+        aria-label="Ouvrir le filtre par genre"
+        type="button"
+      >
+        <SlidersHorizontal size={15} />
+        Genres
+      </button>
+
       <Input
         type="search"
         placeholder="Rechercher un jeu…"
@@ -49,7 +61,9 @@ export default function FilterBar({ filters, onChange }: Props) {
           <SelectValue placeholder="Plateformes" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Toutes les plateformes</SelectItem>
+          <SelectItem value="all">
+            <span className={styles.iconItem}><Gamepad2 size={15} />Toutes les plateformes</span>
+          </SelectItem>
           {platformsData?.results.map((p) => (
             <SelectItem key={p.id} value={String(p.id)}>
               {p.name}
@@ -67,7 +81,9 @@ export default function FilterBar({ filters, onChange }: Props) {
           <SelectValue placeholder="Stores" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Tous les stores</SelectItem>
+          <SelectItem value="all">
+            <span className={styles.iconItem}><ShoppingBag size={15} />Tous les stores</span>
+          </SelectItem>
           {storesData?.results.map((s) => (
             <SelectItem key={s.id} value={String(s.id)}>
               {s.name}
@@ -86,7 +102,7 @@ export default function FilterBar({ filters, onChange }: Props) {
         <SelectContent>
           {SORT_OPTIONS.map((o) => (
             <SelectItem key={o.value} value={o.value}>
-              {o.label}
+              <span className={styles.iconItem}><o.icon size={15} />{o.label}</span>
             </SelectItem>
           ))}
         </SelectContent>
