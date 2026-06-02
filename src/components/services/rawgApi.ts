@@ -1,13 +1,13 @@
 import type { RawgGame, RawgGameDetail, RawgPlatform, RawgStore, RawgPaginated, RawgAchievement, RawgTrailer, RawgPublisher, RawgGenre, RawgScreenshot } from '../../types/rawg';
 
-// Le proxy Vite redirige /rawg → https://api.rawg.io/api et injecte la clé côté serveur.
-// La clé n'est jamais envoyée au navigateur.
-const BASE_URL = '/rawg';
+const BASE_URL = 'https://api.rawg.io/api';
+const API_KEY = import.meta.env.VITE_RAWG_API_KEY as string;
 
 type Params = Record<string, string | number | undefined | null>;
 
 async function rawgFetch<T>(endpoint: string, params: Params = {}): Promise<T> {
-  const url = new URL(`${BASE_URL}${endpoint}`, window.location.origin);
+  const url = new URL(`${BASE_URL}${endpoint}`);
+  url.searchParams.set('key', API_KEY);
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, String(v));
   });
